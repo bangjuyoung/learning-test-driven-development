@@ -6,10 +6,10 @@ class Dollar {
     }
 
     times(multiplier) {
-        return new Dollar(10);
+        return new Dollar(this.amount * multiplier);
     }
 }
 
-let fiver = new Dollar(5);
+let fiver = new Dollar(10);
 let tenner = fiver.times(2);
-assert.strictEqual(tenner.amount, 10);
+assert.strictEqual(tenner.amount, 20);
