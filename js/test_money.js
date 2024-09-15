@@ -40,9 +40,22 @@ class MoneyTest {
         let testMethods = this.getAllTestMethods();
         testMethods.forEach(m => {
             console.log("Running: %s()", m);
+
             let method = Reflect.get(this, m);
-            Reflect.apply(method, this, []);
-            console.log("Succeeded: %s()", m);
+
+            try {
+                Reflect.apply(method, this, []);
+                console.log("Succeeded: %s()", m);
+            } catch(e) {
+                console.log("Failed: %s()", m);
+                if (e instanceof assert.AssertionError) {
+                    console.error(e);
+                } else {
+                    throw e;
+                }
+            }
+
+
         });
     }
 }
