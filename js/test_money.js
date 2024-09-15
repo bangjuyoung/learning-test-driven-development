@@ -25,10 +25,23 @@ class MoneyTest {
         assert.deepStrictEqual(portfolio.evaluate("USD"), fifteenDollars);
     }
 
+    getAllTestMethods() {
+        let moneyPrototype = MoneyTest.prototype;
+        let allProps = Object.getOwnPropertyNames(moneyPrototype);
+
+        let testMethods = allProps.filter(prop => {
+            return typeof moneyPrototype[prop] === 'function' && prop.startsWith("test");
+        });
+
+        return testMethods;
+    }
+
     runAllTests() {
-        this.testMultiplication();
-        this.testDivision();
-        this.testAddition();
+        let testMethods = this.getAllTestMethods();
+        testMethods.forEach(m => {
+            let method = Reflect.get(this, m);
+            Reflect.apply(method, this, []);
+        });
     }
 }
 
