@@ -19,7 +19,7 @@ class Bank {
         let rate = this.exchangeRates.get(key);
 
         if (rate === undefined) {
-            throw new Error("Failed");
+            throw new Error(key);
         }
 
         return new Money(money.amount * rate, currency);
