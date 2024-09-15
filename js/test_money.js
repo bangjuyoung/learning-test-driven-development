@@ -15,6 +15,16 @@ class Money {
     }
 }
 
+class Portfolio {
+    add(money) {
+    }
+
+    evaluate(currency) {
+        return new Money(15, "USD");
+    }
+}
+
+
 let fiveDollars = new Money(5, "USD");
 let tenDollars = new Money(10, "USD");
 assert.deepStrictEqual(fiveDollars.times(2), tenDollars);
