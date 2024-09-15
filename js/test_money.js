@@ -1,38 +1,6 @@
 const assert = require('assert');
-
-class Money {
-    constructor(amount, currency) {
-        this.amount = amount;
-        this.currency = currency;
-    }
-
-    times(multiplier) {
-        return new Money(this.amount * multiplier, this.currency);
-    }
-
-    divide(divisor) {
-        return new Money(this.amount / divisor, this.currency);
-    }
-}
-
-class Portfolio {
-    constructor() {
-        this.moneys = [];
-    }
-
-    add(...moneys) {
-        this.moneys = this.moneys.concat(moneys);
-    }
-
-    evaluate(currency) {
-        let total = this.moneys.reduce((sum, money) => {
-            return sum + money.amount;
-        }, 0);
-
-        return new Money(total, currency);
-    }
-}
-
+const Money = require("./money");
+const Portfolio = require("./portfolio");
 
 let fiveDollars = new Money(5, "USD");
 let tenDollars = new Money(10, "USD");
