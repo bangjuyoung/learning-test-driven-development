@@ -65,6 +65,16 @@ class MoneyTest {
         assert.deepStrictEqual(bank.convert(tenEuros, "USD"), new Money(12, "USD"));
     }
 
+    testConversionMissingExchangeRates() {
+        let bank = new Bank();
+        let tenEuros = new Money(10, "EUR");
+        let expectedError = new Error("EUR->Kalganid");
+
+        assert.throws(function() {
+            bank.convert(tenEuros, "Kalganid")
+        }, expectedError);
+    }
+
     getAllTestMethods() {
         let moneyPrototype = MoneyTest.prototype;
         let allProps = Object.getOwnPropertyNames(moneyPrototype);
