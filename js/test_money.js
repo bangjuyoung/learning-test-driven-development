@@ -39,8 +39,10 @@ class MoneyTest {
     runAllTests() {
         let testMethods = this.getAllTestMethods();
         testMethods.forEach(m => {
+            console.log("Running: %s()", m);
             let method = Reflect.get(this, m);
             Reflect.apply(method, this, []);
+            console.log("Succeeded: %s()", m);
         });
     }
 }
