@@ -73,12 +73,6 @@ class MoneyTest {
         assert.deepStrictEqual(this.bank.convert(tenEuros, "USD"), new Money(13, "USD"));
     }
 
-    testWhatIsTheConversionRateFromEURToUSD() {
-        let tenEuros = new Money(10, "EUR");
-
-        assert.deepStrictEqual(this.bank.convert(tenEuros, "USD"), new Money(12, "USD"));
-    }
-
     testConversionMissingExchangeRates() {
         let bank = new Bank();
         let tenEuros = new Money(10, "EUR");
@@ -96,6 +90,15 @@ class MoneyTest {
         let testMethods = allProps.filter(prop => {
             return typeof moneyPrototype[prop] === 'function' && prop.startsWith("test");
         });
+
+        return this.randomizeTestOrder(testMethods);
+    }
+
+    randomizeTestOrder(testMethods) {
+        for (let i = testMethods.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [testMethods[i], testMethods[j]] = [testMethods[j], testMethods[i]];
+        }
 
         return testMethods;
     }
