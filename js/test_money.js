@@ -64,7 +64,16 @@ class MoneyTest {
         assert.throws(() => portfolio.evaluate(this.bank,"Kalganid"), expectedError);
     }
 
-    testConversion() {
+    testConversionWithDifferentRatesBetweenTwoCurrencies() {
+        let tenEuros = new Money(10, "EUR");
+
+        assert.deepStrictEqual(this.bank.convert(tenEuros, "USD"), new Money(12, "USD"));
+
+        this.bank.addExchangeRate("EUR", "USD", 1.3);
+        assert.deepStrictEqual(this.bank.convert(tenEuros, "USD"), new Money(13, "USD"));
+    }
+
+    testWhatIsTheConversionRateFromEURToUSD() {
         let tenEuros = new Money(10, "EUR");
 
         assert.deepStrictEqual(this.bank.convert(tenEuros, "USD"), new Money(12, "USD"));
