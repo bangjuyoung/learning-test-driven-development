@@ -4,7 +4,7 @@ const Portfolio = require("./portfolio");
 const Bank = require("./bank");
 
 class MoneyTest {
-    constructor() {
+    setup() {
         this.bank = new Bank();
         this.bank.addExchangeRate("EUR", "USD", 1.2);
         this.bank.addExchangeRate("USD", "KRW", 1100);
@@ -108,6 +108,7 @@ class MoneyTest {
             let method = Reflect.get(this, m);
 
             try {
+                this.setup();
                 Reflect.apply(method, this, []);
                 console.log("Succeeded: %s()", m);
             } catch(e) {
