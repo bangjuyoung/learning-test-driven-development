@@ -1,0 +1,17 @@
+{
+  "name": "Learning Test-Driven Development with Javascript",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "node test_money.js",
+    "jshint": "jshint *.js"
+  },
+  "keywords": [
+    "TDD"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "jshint": "^2.13.6"
+  }
+}
