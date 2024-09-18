@@ -104,6 +104,28 @@ class MoneyTest {
         assert.deepStrictEqual(portfolio.evaluate(bank, "Kalganid"), arbitraryResult);
     }
 
+    testAddTwoMoneysInSameCurrency() {
+        let fiveKalganid = new Money(5, "Kalganid");
+        let tenKalganid = new Money(10, "Kalganid");
+        let fifteenKalganid = new Money(15, "Kalganid");
+
+        assert.deepStrictEqual(fiveKalganid.add(tenKalganid), fifteenKalganid);
+        assert.deepStrictEqual(tenKalganid.add(fiveKalganid), fifteenKalganid);
+    }
+
+    testAddTwoMoneysInDifferentCurrencies() {
+        let euro = new Money(1, "EUR");
+        let dollar = new Money(1, "USD");
+
+        assert.throws(() => {
+            euro.add(dollar);
+        }, new Error("Cannot add USD to EUR"));
+
+        assert.throws(() => {
+            dollar.add(euro);
+        }, new Error("Cannot add EUR to USD"));
+    }
+
     getAllTestMethods() {
         let moneyPrototype = MoneyTest.prototype;
         let allProps = Object.getOwnPropertyNames(moneyPrototype);
